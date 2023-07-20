@@ -9,7 +9,7 @@ import MovieCard from "../components/movie/MovieCard";
 // https://api.themoviedb.org/3/movie/{movie_id}
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const { data, error } = useSWR(
+  const { data } = useSWR(
     `
     https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`,
     fetcher
