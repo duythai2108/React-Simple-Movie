@@ -2,13 +2,10 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/scss";
 import MovieCard from "./MovieCard";
 import useSWR from "swr";
-import { fetcher } from "../../config";
+import { fetcher, tmdbAPI } from "../../config";
 // https://api.themoviedb.org/3/movie/now_playing?api_key=5ea43b5e959eb20d0dc94530da347c4d
 const MovieList = ({ type = "now_playing" }) => {
-  const { data } = useSWR(
-    `https://api.themoviedb.org/3/movie/${type}?api_key=5ea43b5e959eb20d0dc94530da347c4d`,
-    fetcher
-  );
+  const { data } = useSWR(tmdbAPI.getMovieList(type), fetcher);
 
   const movies = data?.results || [];
 
