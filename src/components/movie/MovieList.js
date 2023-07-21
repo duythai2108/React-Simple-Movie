@@ -3,7 +3,10 @@ import "swiper/scss";
 import MovieCard from "./MovieCard";
 import useSWR from "swr";
 import { fetcher, tmdbAPI } from "../../config";
-// https://api.themoviedb.org/3/movie/now_playing?api_key=5ea43b5e959eb20d0dc94530da347c4d
+import PropTypes from "prop-types";
+import { withErrorBoundary } from "react-error-boundary";
+
+
 const MovieList = ({ type = "now_playing" }) => {
   const { data } = useSWR(tmdbAPI.getMovieList(type), fetcher);
 
@@ -23,4 +26,17 @@ const MovieList = ({ type = "now_playing" }) => {
   );
 };
 
-export default MovieList;
+MovieList.propTypes = {
+  type: PropTypes.string.isRequired,
+};
+
+function fallback() {
+  return (
+    <p className="bg-red-50 text-red-400">
+      Something went wrong with this component
+    </p>
+  );
+}
+export default withErrorBoundary(MovieList, {
+  fallback: fallback,
+});
