@@ -7,7 +7,7 @@ import Banner from "./components/banner/Banner";
 // import MoviePage from "./pages/MoviePage";
 // import MovieDetailsPage from "./pages/MovieDetailsPage";
 
-// lazy load 
+// lazy load
 // * dynamic import
 const HomePage = lazy(() => import("./pages/HomePage"));
 const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"));
@@ -34,6 +34,7 @@ function App() {
               element={<MovieDetailsPage></MovieDetailsPage>}
             ></Route>
           </Route>
+          <Route path="*" element={<>Not found</>}></Route>
         </Routes>
       </Suspense>
     </Fragment>
